@@ -2,10 +2,6 @@
 <head>
 	<title>GenQ</title>
 
-	<!--
-	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-	<script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
-	-->
 	<!-- Materialize -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,11 +9,6 @@
 	<!-- JQuery -->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script> 
 
-	<!-- noUiSlider 
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/13.1.5/nouislider.min.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/13.1.5/nouislider.min.js"></script>
-	-->
-	
 	<!-- Local stuffs -->
 	<link href="css/particles.css?4" rel="stylesheet" />
 	<link href="css/main.css?9" rel="stylesheet" />
@@ -31,17 +22,10 @@
 	<!-- particles.js container -->
 	<div id="particles-js"></div>
 	
-	<!-- stats - count particles 
-	<div class="count-particles">
-	  <span class="js-count-particles">--</span> particles
-	</div>
-	-->
-	
 	<header>
 	</header>
 
 	<main class="z-depth-1">
-
 		<div class="row">
 			<div class="col s12">
 				<ul class="tabs transparent" id="rng-tabs">
@@ -49,6 +33,7 @@
 					<li class="tab col s6"><a href="#choices">Choices</a></li>
 				</ul>
 			</div>
+			
 			<!-- Generate a random number -->
 			<div id="numbers" class="col s12">
 				<form id="rng-form" action="#">
@@ -74,6 +59,7 @@
 					</div>
 				</form>
 			</div>
+			
 			<!-- Select from a list of choices (Random Choice Generator - rcg) -->
 			<div id="choices" class="col s12">
 				<form id="rcg-form" action="#">
@@ -109,7 +95,10 @@
 	</div>
   
 	<footer>
-		<a target="_blank" href="http://cdn.shitchell.com/txt/wtfpl.txt" />wtfpl</a> | <a href="#about-modal" class="modal-trigger">about</a> | <a id="theme-toggle" href="#">dark</a> | <a id="toggle-fs" href="#">fullscreen</a>
+		<a target="_blank" href="http://cdn.shitchell.com/txt/wtfpl.txt" />wtfpl</a> |
+		<a href="#about-modal" class="modal-trigger">about</a> |
+		<a id="theme-toggle" href="#">dark</a> |
+		<a id="toggle-fs" href="#">fullscreen</a>
 	</footer>
 
 	<!-- particles.js lib and config -->
