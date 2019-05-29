@@ -244,6 +244,7 @@ class QRNG
 	static replaceMath()
 	{
 		var generator = new QRNG(QRNG.MAX_BLOCK_SIZE * QRNG.MAX_ARRAY_SIZE * 2); // Maximum cache size
+		Math.qrng = generator;
 		Math.random = function() {
 			return generator.getFloat();
 		}
