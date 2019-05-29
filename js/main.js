@@ -1,5 +1,10 @@
 var rng = new QRNG();
 var loadingTimeout = 5; // after 5 seconds, update the user that we're loading qrn's
+var rcgOldSize;
+
+$(window).load(function() {
+	rcgOldSize = $(".tabs-content").innerHeight();
+});
 
 $(document).ready(function() {
 	// Replace Math.random with QRNG.getFloat
@@ -55,19 +60,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		var choiceText = $("#rcg-input").val();
-
-		if (choiceText !== "")
-		{
-			var chip = $("<div/>").addClass("chip");
-			var icon = $("<i/>").addClass("close material-icons");
-			$(icon).html("close");
-			$(chip).append(choiceText).append(icon);
-
-			$("#rcg-choices").append(chip);
-			$("#rcg-input").val("");
-			
-			console.log("rcg-form: added '" + choiceText + "'");
-		}
+		addChoice(choiceText);
 	});
 
 	$("#rcg-choose-button").click(function(e) {
@@ -79,6 +72,7 @@ $(document).ready(function() {
 
 	$("#rcg-clear-button").click(function(e) {
 		$("#rcg-choices").html("");
+		$(".tabs-content").height(rcgOldSize);
 	})
 
 	rng.onCacheEmpty = function() {
@@ -103,3 +97,26 @@ $(document).ready(function() {
 		}
 	}, loadingTimeout * 1000);
 });
+
+function addChoice(choiceText)
+{
+	if (choiceText !== "")
+	{
+		var chip = $("<div/>").addClass("chip");
+		var icon = $("<i/>").addClass("close material-icons");
+		$(icon).html("close");
+		$(chip).append(choiceText).append(icon);
+
+		$("#rcg-choices").append(chip);
+		$("#rcg-input").val("");
+
+		let testSize = $("#rcg-choices").innerHeight() + 160;
+		if (testSize < rcgOldSize)
+		{
+			testSize = rcgOldSize;
+		}
+		$(".tabs-content").height(testSize);
+		
+		console.log("rcg-form: added '" + choiceText + "'");
+	}
+}

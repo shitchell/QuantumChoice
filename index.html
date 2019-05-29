@@ -13,9 +13,9 @@
 
 	<!-- Local stuffs -->
 	<link href="css/particles.css?4" rel="stylesheet" />
-	<link href="css/main.css?9" rel="stylesheet" />
+	<link href="css/main.css?13" rel="stylesheet" />
 	<script src="js/qrng.js?12"></script>
-	<script src="js/main.js?13"></script>
+	<script src="js/main.js?18"></script>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -23,85 +23,86 @@
 <body>
 	<!-- particles.js container -->
 	<div id="particles-js"></div>
-	
-	<header>
-	</header>
 
-	<main class="z-depth-1">
-		<div class="row">
-			<div class="col s12">
-				<ul class="tabs transparent" id="rng-tabs">
-					<li class="tab col s6"><a href="#numbers">Numbers</a></li>
-					<li class="tab col s6"><a href="#choices">Choices</a></li>
-				</ul>
-			</div>
-			
-			<!-- Generate a random number -->
-			<div id="numbers" class="col s12">
-				<form id="rng-form" action="#">
-					<div class="row s12">
-						<div class="input-field col s6">
-							<input id="rng-min" type="number" class="white-text" value="0">
-							<label for="rng-min">Minimum</label>
-						</div>
-						<div class="input-field col s6">
-							<input id="rng-max" type="number" class="white-text" value="10">
-							<label for="rng-max">Maximum</label>
-						</div>
-					</div>
-					<div class="row s12 center-align">
-						<div class="col s12 l2 offset-l5 center-align">
-							<div class="rng-result-panel card-panel">
-								<h4 id="rng-result">-</h4>
+	<div id="content-wrapper" class="row valign-wrapper">
+		
+		<header>
+		</header>
+	
+		<main class="z-depth-1 col s12 m10 offset-m1">
+			<div class="row">
+				<div class="col s12">
+					<ul class="tabs transparent" id="rng-tabs">
+						<li class="tab col s6"><a href="#numbers">Numbers</a></li>
+						<li class="tab col s6"><a href="#choices">Choices</a></li>
+					</ul>
+				</div>
+				
+				<!-- Generate a random number -->
+				<div id="numbers" class="col s12">
+					<form id="rng-form" action="#">
+						<div class="row s12">
+							<div class="input-field col s6">
+								<input id="rng-min" type="number" class="white-text" value="0">
+								<label for="rng-min">Minimum</label>
+							</div>
+							<div class="input-field col s6">
+								<input id="rng-max" type="number" class="white-text" value="10">
+								<label for="rng-max">Maximum</label>
 							</div>
 						</div>
-					</div>
-					<div class="row center-align">
-						<button type="submit" class="qrng waves-effect waves-light btn-small">Generate Number</a>
-					</div>
-				</form>
-			</div>
-			
-			<!-- Select from a list of choices (Random Choice Generator - rcg) -->
-			<div id="choices" class="col s12">
-				<form id="rcg-form" action="#">
-					<div class="row s12">
-						<div class="input-field col s12">
-							<input id="rcg-input" type="text" class="rcg-input white-text" />
-							<label for="rcg-input">Enter Choice...</label>
+						<div class="row s12 center-align">
+							<div class="col s12 l2 offset-l5 center-align">
+								<h4 id="rng-result" class="z-depth-2">-</h4>
+							</div>
 						</div>
-					</div>
-					<div class="row center-align">
-						<button type="submit" class="btn-small waves-effect waves-light">Add</button>
-						<button id="rcg-clear-button" class="btn-small waves-effect waves-light">Clear</button>
-						<button id="rcg-choose-button" class="qrng waves-effect waves-light btn-small">Choose</a>
-					</div>
-					<div id="rcg-choices" class="row s12"></div>
-				</form>
+						<div class="row center-align">
+							<button type="submit" class="qrng waves-effect waves-light btn-small">Generate Number</a>
+						</div>
+					</form>
+				</div>
+				
+				<!-- Select from a list of choices (Random Choice Generator - rcg) -->
+				<div id="choices" class="col s12">
+					<form id="rcg-form" action="#">
+						<div class="row s12">
+							<div class="input-field col s12">
+								<input id="rcg-input" type="text" class="rcg-input white-text" />
+								<label for="rcg-input">Enter Choice...</label>
+							</div>
+						</div>
+						<div class="row center-align">
+							<button type="submit" class="btn-small waves-effect waves-light">Add</button>
+							<button id="rcg-clear-button" class="btn-small waves-effect waves-light">Clear</button>
+							<button id="rcg-choose-button" class="qrng waves-effect waves-light btn-small">Choose</a>
+						</div>
+						<div id="rcg-choices" class="row s12"></div>
+					</form>
+				</div>
+			</div>
+		</main>
+	
+		<div id="about-modal" class="modal modal-fixed-footer">
+			<div class="modal-content">
+				<h5>Quantum Random</h5>
+				<p>This tool was inspired by the <a href="https://www.reddit.com/r/randonauts/" target="_blank">randonaut subreddit</a> and powered by <a href="https://qrng.anu.edu.au/" target="_blank">Australian National University's quantum random number generator</a> using the <a href="https://github.com/shitchell/qrng">qrng.js</a> library.</p>
+				<p>Using qrng.js to replace Math.random, every single random event on this webpage is based on quantum randomness, even the movement of the background particles!</p>
+				<h5>But why?</h5>
+				<p>Our world seems to be fairly deterministic, with each event being the result of all events before it. Just like tipping over a dominoe sets into effect a cascade of falling dominoes. But the quantum world <i>seems</i> to be truly random, which allows us to sidestep determinism by taking quantum randomness from the micro and introducing it to the macro.</p>
+				<p>So escape the confines of determinism. Step outside your causal path. Make a quantum decision :)</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
 			</div>
 		</div>
-	</main>
-
-	<div id="about-modal" class="modal modal-fixed-footer">
-		<div class="modal-content">
-			<h5>Quantum Random</h5>
-			<p>This tool was inspired by the <a href="https://www.reddit.com/r/randonauts/" target="_blank">randonaut subreddit</a> and powered by <a href="https://qrng.anu.edu.au/" target="_blank">Australian National University's quantum random number generator</a> using the <a href="https://github.com/shitchell/qrng">qrng.js</a> library.</p>
-			<p>Using qrng.js to replace Math.random, every single random event on this webpage is based on quantum randomness, even the movement of the background particles!</p>
-			<h5>But why?</h5>
-			<p>Our world seems to be fairly deterministic, with each event being the result of all events before it. Just like tipping over a dominoe sets into effect a cascade of falling dominoes. But the quantum world <i>seems</i> to be truly random, which allows us to sidestep determinism by taking quantum randomness from the micro and introducing it to the macro.</p>
-			<p>So escape the confines of determinism. Step outside your causal path. Make a quantum decision :)</p>
-		</div>
-		<div class="modal-footer">
-			<a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-		</div>
+	  
+		<footer>
+			<a target="_blank" href="http://cdn.shitchell.com/txt/wtfpl.txt" />wtfpl</a> |
+			<a href="#about-modal" class="modal-trigger">about</a> |
+			<a id="theme-toggle" href="#">dark</a> |
+			<a id="toggle-fs" href="#">fullscreen</a>
+		</footer>
 	</div>
-  
-	<footer>
-		<a target="_blank" href="http://cdn.shitchell.com/txt/wtfpl.txt" />wtfpl</a> |
-		<a href="#about-modal" class="modal-trigger">about</a> |
-		<a id="theme-toggle" href="#">dark</a> |
-		<a id="toggle-fs" href="#">fullscreen</a>
-	</footer>
 
 	<!-- particles.js lib and config -->
 	<script src="js/particles.js"></script>

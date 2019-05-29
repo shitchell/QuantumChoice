@@ -1,14 +1,19 @@
 body {
-	display: flex;
-	font-size: 1em;
+}
+
+#content-wrapper {
+	padding: 3em;
+	margin: 0;
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 100%;
+	position: relative;
 }
 
 main {
 	z-index: 1;
-	width: 70%;
 	min-height: 50%;
 	background-color: rgba(0, 0, 0, 0.5);
-	margin: auto;
 	border-radius: 1em;
 
 	-webkit-transition: all 0.5s ease;
@@ -21,20 +26,17 @@ main.dark {
 	background-color: rgba(255, 255, 255, 0.04);
 }
 
-.rng-result-panel {
-	background-color: rgba(0, 0, 0, 0.1);
-	color: #FFF;
-}
-
 #rng-result {
 	margin: 0;
+	color: #FFF;
+	padding: 0.2em;
 	overflow-x: auto;
+	display: inline-block;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 #rcg-choices {
 	padding: 0 1em;
-	max-height: 50%;
-	overflow-y: auto;
 }
 
 .rcg-picked {
