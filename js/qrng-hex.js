@@ -214,6 +214,11 @@ class QRNG
 		{
 			return NaN;
 		}
+
+		if (max - min === 1)
+		{
+			return min;
+		}
 		
 		let num = this._getRandom(max - min);
 		num = parseInt(num, 16);

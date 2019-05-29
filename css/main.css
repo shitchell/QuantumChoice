@@ -1,6 +1,10 @@
 body {
 }
 
+.carousel.carousel-slider .carousel-item {
+	padding-top: 1em;
+}
+
 #content-wrapper {
 	padding: 3em;
 	margin: 0;
@@ -26,7 +30,7 @@ main.dark {
 	background-color: rgba(255, 255, 255, 0.04);
 }
 
-#rng-result {
+.result-container {
 	margin: 0;
 	color: #FFF;
 	padding: 0.2em;
@@ -69,4 +73,8 @@ footer a:hover, footer a.dark:hover {
 
 #particles-js.fullscreen {
 	z-index: 2;
+}
+
+#8ball-container {
+	position: relative;
 }
