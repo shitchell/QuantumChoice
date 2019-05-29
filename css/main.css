@@ -1,0 +1,70 @@
+body {
+	display: flex;
+	font-size: 1em;
+}
+
+main {
+	z-index: 1;
+	width: 70%;
+	min-height: 50%;
+	background-color: rgba(0, 0, 0, 0.5);
+	margin: auto;
+	border-radius: 1em;
+
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	transition-property: background-color;
+}
+main.dark {
+	background-color: rgba(255, 255, 255, 0.04);
+}
+
+.rng-result-panel {
+	background-color: rgba(0, 0, 0, 0.1);
+	color: #FFF;
+}
+
+#rng-result {
+	margin: 0;
+	overflow-x: auto;
+}
+
+#rcg-choices {
+	padding: 0 1em;
+	max-height: 50%;
+	overflow-y: auto;
+}
+
+.rcg-picked {
+	background-color: #666;
+	color: #FFF;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 1em;
+	color: #CCC;
+	z-index: 3;
+}
+
+footer a:link, footer a:active, footer a:visited {
+	color: #DDD;
+	text-decoration: none;
+}
+footer a.dark:link, footer a.dark:active, footer a.dark:visited {
+	color: #999;
+	text-decoration: none;
+}
+
+footer a:hover, footer a.dark:hover {
+	color: #FFF;
+	text-decoration: none;
+}
+
+#particles-js.fullscreen {
+	z-index: 2;
+}
