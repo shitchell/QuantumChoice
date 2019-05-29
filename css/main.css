@@ -1,5 +1,4 @@
 body {
-	font-size: 1em;
 }
 
 .carousel.carousel-slider .carousel-item {
@@ -50,6 +49,7 @@ main.dark {
 }
 
 footer {
+	font-size: 1.2em;
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -78,4 +78,8 @@ footer a:hover, footer a.dark:hover {
 
 #8ball-container {
 	position: relative;
+}
+
+#about-modal {
+	font-size: 1.2em;
 }
