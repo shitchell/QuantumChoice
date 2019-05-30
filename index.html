@@ -1,8 +1,12 @@
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>GenQ</title>
 
 	<link rel="icon" href="/img/qrandom.png" type="image/x-icon">
+
+	<!-- Tinos font (for Hebrew chars) -->
+	<link href="https://fonts.googleapis.com/css?family=Tinos&display=swap" rel="stylesheet">
 
 	<!-- Materialize -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet" />
@@ -15,10 +19,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js"></script>
 	
 	<!-- Local stuffs -->
-	<link href="css/particles.css?4" rel="stylesheet" />
-	<link href="css/main.css?15" rel="stylesheet" />
-	<script src="js/qrng.js?12"></script>
-	<script src="js/main.js?18"></script>
+	<link href="css/particles.css?5" rel="stylesheet" />
+	<link href="css/main.css?16" rel="stylesheet" />
+	<script src="js/qrng.js?13"></script>
+	<script src="js/main.js?19"></script>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -38,7 +42,7 @@
 					<ul class="tabs transparent" id="rng-tabs">
 						<li class="tab col s4"><a href="#numbers">Numbers</a></li>
 						<li class="tab col s4"><a href="#choices">Choices</a></li>
-						<li class="tab col s4"><a href="#8ball">8-Ball</a></li>
+						<li class="tab col s4"><a href="#eight-ball">8-Ball</a></li>
 					</ul>
 				</div>
 				
@@ -85,12 +89,12 @@
 				</div>
 
 				<!-- 8-ball -->
-				<div id="8ball" class="col s12">
+				<div id="eight-ball" class="col s12">
 					<div class="row center-align">
-						<button id="8ball-button" class="qrng btn-small waves-effect waves-light">Ask a Question...</button>
+						<button id="eight-ball-button" class="qrng btn-small waves-effect waves-light">Ask a Question...</button>
 					</div>
 					<div class="row center-align">
-						<h4 id="8ball-result" class="z-depth-2 result-container">?</h4>
+						<h4 id="eight-ball-result" class="z-depth-2 result-container">?</h4>
 					</div>
 				</div>
 			</div>
@@ -104,6 +108,8 @@
 				<h5>But why?</h5>
 				<p>Our world seems to be fairly deterministic, with each event being the result of all events before it&mdash;just like tipping over a domino sets into effect a cascade of falling dominoes. But the quantum world <i>seems</i> to be truly random, which allows us to sidestep determinism by taking quantum randomness from the micro and introducing it to the macro.</p>
 				<p>So escape the confines of determinism. Step outside your causal path. Make a quantum decision :)</p>
+				<h5>Why are buttons disabled?</h5>
+				<p>Sometimes ANU's quantum random number generator goes down :/ Since this tool relies on them, if they go down, this site is no longer functional. I intend to add more sources as soon as I add more sources.</p>
 			</div>
 			<div class="modal-footer">
 				<a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
@@ -120,7 +126,7 @@
 
 	<!-- particles.js lib and config -->
 	<script src="js/particles.js"></script>
-	<script src="js/config.js?2" type="text/javascript"></script>
+	<script src="js/config.js?3" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

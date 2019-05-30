@@ -1,8 +1,9 @@
-var rng = new QRNG();
+var rng = new QRNG(2048);
 var loadingTimeout = 5; // after 5 seconds, update the user that we're loading qrn's
 var rcgOldSize;
 var morphSpeed = 100;
-var morphChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -',.";
+var morphChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -',." +
+ "ΦΧΨΩαβγδεζηθικλμνξοπρστυφχψωάΆέΈέΉίΎΫὰάὲέὴὶὺὼΏאבגדהוזחטיכךלמםנןסעפףצץקרשת";
 var magicAnswers = [
 	"It is certain.", 
 	"It is decidedly so.", 
@@ -107,11 +108,11 @@ $(document).ready(function() {
 	});
 
 	// 8-Ball
-	$("#8ball-button").click(function(e) {
+	$("#eight-ball-button").click(function(e) {
 		e.preventDefault();
 
 		let answer = randomChoice(magicAnswers);
-		morphifyText($("#8ball-result"), answer);
+		morphifyText($("#eight-ball-result"), answer);
 	});
 
 	rng.onCacheEmpty = function() {
@@ -134,7 +135,12 @@ $(document).ready(function() {
 	setTimeout(function() {
 		if (!rng.isReady())
 		{
-			M.toast({html: "Attempting to load quantumness..."});
+			M.toast({html: "Quantum flux hyperdrives reloading..."});
+			var oldIsReady = rng.onReady;
+			rng.onReady = function() {
+				oldIsReady();
+				M.toast({html: "Quantum randomness acheived!"});
+			}
 		}
 	}, loadingTimeout * 1000);
 });
@@ -200,27 +206,27 @@ function morphifyText(el, text, indices, morphText) {
 			let indexIndex = rng.getInteger(0, indicesKeys.length);
 			let index = parseInt(indicesKeys.splice(indexIndex, 1)[0]);
 			indices[index] -= 1;
-	
-			// If we hit 0, make this char the correct value
+			var newChar;
+			
+			// If we hit 0 for this index, make this char the correct value
 			if (indices[index] <= 0)
 			{
-				morphText = replaceChar(morphText, index, text[index]);
+				newChar = text[index];
 				delete indices[index];
 			}
 			else
 			{
-				var newChar = randomChoice(morphChars);
-				if (newChar == text[index])
+				newChar = randomChoice(morphChars);
+				if (newChar === text[index])
 				{
 					// If we randomly got the right choice, stop altering this text
 					delete indices[index];
 				}
-				let test = replaceChar(morphText, index, randomChoice(morphChars));
-				morphText = test;
 			}
+			
+			morphText = replaceChar(morphText, index, newChar);
 		}
 
-		console.log(text, "=>", morphText, indices);
 		$(el).html(morphText);
 		
 		if (Object.keys(indices).length > 0)
