@@ -1,4 +1,4 @@
-var rng = new QRNG(2048);
+var rng = new QRNG(20480);
 var loadingTimeout = 5; // after 5 seconds, update the user that we're loading qrn's
 var rcgOldSize;
 var morphSpeed = 100;
