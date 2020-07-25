@@ -1,1 +1,1 @@
-qrng-hex.js
+../../qrng/qrng.js
