@@ -28,4 +28,4 @@ So if you flip a coin to make a decision, the outcome is not actually random. Wh
 
 But if you base a decision off of quantum randomness... oh boy. *Now* you're making a decision that can't be predicted by math and physical laws. *Now* your decision isn't simply some inevitable result of fate.
 
-So introduce some quantum randomness into your life and write a new script--yours. Break free from determinism :)
+So introduce some quantum randomness into your life and write a new script. Break free from determinism :)
