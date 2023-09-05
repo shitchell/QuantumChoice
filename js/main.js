@@ -128,6 +128,7 @@ $(document).ready(function() {
 	// Disable all qrng dependent buttons until loaded
 	if (!rng.isReady())
 	{
+		console.log("rng is not ready, disabling");
 		$(".qrng").prop("disabled", true);
 	}
 
