@@ -1,4 +1,4 @@
 [submodule "externals/qrng"]
 	path = externals/qrng
-	url = https://github.com/shitchell/qrng.git
-#	url = git@github.com:shitchell/qrng.git
+#	url = https://github.com/shitchell/qrng.git
+	url = git@github.com:shitchell/qrng.git
