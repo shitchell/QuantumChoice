@@ -1,10 +1,10 @@
-var rng = new QRNG(20480);
-var loadingTimeout = 5; // after 5 seconds, update the user that we're loading qrn's
+const rng = new QRNG(20480);
+const loadingTimeout = 5; // after 5 seconds, update the user that we're loading qrn's
 var rcgOldSize;
-var morphSpeed = 100;
-var morphChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -',." +
- "ΨΩαβγδεζηθικλμνξοπρστυφχфхцчГДЁЖЗЙКЛΦΛΘΔэю";
-var magicAnswers = [
+const morphSpeed = 100;
+const morphChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -',." +
+                   "ΨΩαβγδεζηθικλμνξοπρστυφχфхцчГДЁЖЗЙКЛΦΛΘΔэю";
+const magicAnswers = [
 	"It is certain.",
 	"It is decidedly so.",
 	"Without a doubt.",
@@ -78,10 +78,10 @@ $(document).ready(function() {
 	$("#rng-form").submit(function(e) {
 		e.preventDefault();
 		
-		var rngMinimum = parseInt($("#rng-min").val()) || 0;
-		var rngMaximum = parseInt($("#rng-max").val()) || 1000;
-		
-		var randomNumber = rng.getInteger(rngMinimum, rngMaximum + 1);
+		let rngMinimum = parseInt($("#rng-min").val()) || 0;
+		let rngMaximum = parseInt($("#rng-max").val()) || 1000;
+		let randomNumber = rng.getInteger(rngMinimum, rngMaximum + 1);
+
 		$("#rng-result").html(randomNumber.toLocaleString());
 		console.log("rng-form: ", randomNumber);
 	});
@@ -97,7 +97,7 @@ $(document).ready(function() {
 	// RCG - Choose an option
 	$("#rcg-choose-button").click(function(e) {
 		$(".rcg-picked").removeClass("rcg-picked z-depth-2"); // clear the last picked item
-		var choice = randomChoice($("#rcg-choices").children());
+		var choice = rng.getChoice($("#rcg-choices").children());
 		$(choice).addClass("rcg-picked z-depth-2");
 	});
 
@@ -111,7 +111,7 @@ $(document).ready(function() {
 	$("#eight-ball-button").click(function(e) {
 		e.preventDefault();
 
-		let answer = randomChoice(magicAnswers);
+		let answer = rng.getChoice(magicAnswers);
 		morphifyText($("#eight-ball-result"), answer);
 	});
 
@@ -169,12 +169,6 @@ function addChoice(choiceText)
 	}
 }
 
-function randomChoice(arr)
-{
-	let index = rng.getInteger(0, arr.length);
-	return arr[index];
-}
-
 function morphifyText(el, text, indices, morphText) {
 	// Generate an associative array of each index with a value of 3 if indices is undefined
 	if (typeof indices === "undefined")
@@ -192,7 +186,7 @@ function morphifyText(el, text, indices, morphText) {
 		morphText = "";
 		for (i = 0; i < text.length; i++)
 		{
-			morphText += randomChoice(morphChars);
+			morphText += rng.getChoice(morphChars);
 		}
 	}
 
@@ -217,7 +211,7 @@ function morphifyText(el, text, indices, morphText) {
 			}
 			else
 			{
-				newChar = randomChoice(morphChars);
+				newChar = rng.getChoice(morphChars);
 				if (newChar === text[index])
 				{
 					// If we randomly got the right choice, stop altering this text
