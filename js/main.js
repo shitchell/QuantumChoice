@@ -33,7 +33,7 @@ $(window).load(function() {
 
 $(document).ready(function() {
 	// Replace Math.random with QRNG.getFloat
-	QRNG.replaceMath();
+	// QRNG.replaceMath(); // Disabled - too many API calls for particles
 
 	// Set the background to fullscreen
 	$("#toggle-fs").click(function(e) {
