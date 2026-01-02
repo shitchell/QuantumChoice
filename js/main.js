@@ -128,8 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Scroll instantly (no animation) then reveal
         scrollToPanel(initialHash, false);
     }
-    // Reveal panels after positioning
-    requestAnimationFrame(() => tabPanels.classList.add('ready'));
+    // Reveal main card after positioning
+    requestAnimationFrame(() => mainCard.classList.add('ready'));
 
     // ----- Modal -----
     $('#about-trigger').addEventListener('click', (e) => {

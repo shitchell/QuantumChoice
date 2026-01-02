@@ -53,6 +53,7 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
   --transition-slow: 400ms ease;
+  --transition-long: 1s    ease;
 
   /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -144,7 +145,18 @@ main.card {
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow);
   padding: var(--space-lg);
-  transition: background var(--transition-base), border var(--transition-base);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    background var(--transition-base),
+    border var(--transition-base),
+    opacity var(--transition-long),
+    transform var(--transition-slow);
+}
+
+main.card.ready {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ----- Tabs ----- */
@@ -217,12 +229,6 @@ main.card {
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
-  opacity: 0;
-  transition: opacity var(--transition-fast);
-}
-
-.tab-panels.ready {
-  opacity: 1;
 }
 
 .tab-panels::-webkit-scrollbar {
