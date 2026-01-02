@@ -67,27 +67,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialTheme = savedTheme || getSystemTheme();
     applyTheme(initialTheme);
 
-    // ----- Tabs -----
+    // ----- Tabs (Swipeable) -----
     const tabs = $$('.tab');
     const panels = $$('.tab-panel');
+    const tabPanels = $('.tab-panels');
 
+    // Click tab → scroll to panel
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const targetId = tab.dataset.tab;
-
-            // Update tabs
-            tabs.forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-            tab.classList.add('active');
-            tab.setAttribute('aria-selected', 'true');
-
-            // Update panels
-            panels.forEach(p => p.classList.remove('active'));
-            $(`#${targetId}`).classList.add('active');
+            const targetPanel = $(`#${targetId}`);
+            targetPanel.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
         });
     });
+
+    // Observe panels to update active tab on swipe
+    const panelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                const panelId = entry.target.id;
+
+                // Update tabs
+                tabs.forEach(t => {
+                    const isActive = t.dataset.tab === panelId;
+                    t.classList.toggle('active', isActive);
+                    t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+                    // Scroll active tab into view
+                    if (isActive) {
+                        t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    }
+                });
+            }
+        });
+    }, {
+        root: tabPanels,
+        threshold: 0.5
+    });
+
+    panels.forEach(panel => panelObserver.observe(panel));
 
     // ----- Modal -----
     $('#about-trigger').addEventListener('click', (e) => {
@@ -182,6 +200,52 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const answer = rng.getChoice(magicAnswers);
         morphifyText($('#eight-ball-result'), answer);
+    });
+
+    // ----- Compass -----
+    const compassNeedle = $('#compass-needle');
+    const compassDegrees = $('#compass-degrees');
+    let currentRotation = 0;
+
+    $('#compass-button').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Get random final angle (0-359)
+        const targetDegree = rng.getInteger(0, 360);
+
+        // Add 2-4 full spins plus the target angle
+        const extraSpins = rng.getInteger(2, 5) * 360;
+        const totalRotation = currentRotation + extraSpins + (targetDegree - (currentRotation % 360));
+
+        // Apply rotation
+        compassNeedle.classList.add('spinning');
+        compassNeedle.style.transform = `rotate(${totalRotation}deg)`;
+
+        // Update display with animation
+        const startDegree = currentRotation % 360;
+        const duration = 3000;
+        const startTime = performance.now();
+
+        function updateDegrees(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function (ease-out)
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const currentDeg = Math.round((startDegree + (totalRotation - currentRotation) * eased) % 360);
+
+            compassDegrees.textContent = `${(currentDeg + 360) % 360}°`;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateDegrees);
+            } else {
+                compassDegrees.textContent = `${targetDegree}°`;
+                compassNeedle.classList.remove('spinning');
+            }
+        }
+
+        requestAnimationFrame(updateDegrees);
+        currentRotation = totalRotation;
     });
 
     // ----- QRNG Callbacks -----

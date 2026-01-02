@@ -150,14 +150,27 @@ main.card {
 /* ----- Tabs ----- */
 .tabs {
   display: flex;
+  justify-content: center;
   gap: var(--space-xs);
   margin-bottom: var(--space-lg);
   border-bottom: 1px solid var(--glass-border);
   padding-bottom: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tab {
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 80px;
   padding: var(--space-sm) var(--space-md);
   background: transparent;
   border: none;
@@ -169,6 +182,8 @@ main.card {
   cursor: pointer;
   transition: all var(--transition-fast);
   position: relative;
+  scroll-snap-align: center;
+  white-space: nowrap;
 }
 
 .tab:hover {
@@ -192,23 +207,29 @@ main.card {
   border-radius: var(--radius-full);
 }
 
-/* ----- Tab Panels ----- */
+/* ----- Tab Panels (Swipeable) ----- */
 .tab-panels {
-  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tab-panels::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-panel {
-  display: none;
-  animation: fadeIn var(--transition-base);
-}
-
-.tab-panel.active {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 0 var(--space-xl);
+  box-sizing: border-box;
 }
 
 /* ----- Form Elements ----- */
@@ -632,6 +653,37 @@ footer .separator {
     flex: 1;
     min-width: auto;
   }
+}
+
+/* ----- Compass ----- */
+.compass-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.compass {
+  width: 180px;
+  height: 180px;
+  color: var(--text-primary);
+}
+
+.compass-needle {
+  transform-origin: 100px 100px;
+  transition: transform 3s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.compass-needle.spinning {
+  transition: transform 3s cubic-bezier(0.1, 0.7, 0.3, 1);
+}
+
+.compass-degrees {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent-glow);
 }
 
 /* ----- Loading State ----- */
