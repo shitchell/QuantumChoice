@@ -103,10 +103,11 @@ body {
 /* ----- Particles Background ----- */
 #particles-js {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
-  height: 100vh;
-  height: 100dvh;
   background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
   transition: background var(--transition-slow);
 }
