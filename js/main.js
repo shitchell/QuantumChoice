@@ -72,12 +72,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const panels = $$('.tab-panel');
     const tabPanels = $('.tab-panels');
 
-    // Click tab → scroll to panel
+    // Scroll to panel by ID
+    function scrollToPanel(panelId, smooth = true) {
+        const targetPanel = $(`#${panelId}`);
+        if (targetPanel) {
+            targetPanel.scrollIntoView({
+                behavior: smooth ? 'smooth' : 'instant',
+                inline: 'start',
+                block: 'nearest'
+            });
+        }
+    }
+
+    // Click tab → scroll to panel and update hash
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const targetId = tab.dataset.tab;
-            const targetPanel = $(`#${targetId}`);
-            targetPanel.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+            scrollToPanel(targetId);
+            history.replaceState(null, '', `#${targetId}`);
         });
     });
 
@@ -86,6 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
                 const panelId = entry.target.id;
+
+                // Update hash without scrolling
+                history.replaceState(null, '', `#${panelId}`);
 
                 // Update tabs
                 tabs.forEach(t => {
@@ -106,6 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     panels.forEach(panel => panelObserver.observe(panel));
+
+    // Load tab from hash on page load
+    const initialHash = window.location.hash.slice(1);
+    if (initialHash && $(`#${initialHash}`)) {
+        // Scroll instantly (no animation) then reveal
+        scrollToPanel(initialHash, false);
+    }
+    // Reveal panels after positioning
+    requestAnimationFrame(() => tabPanels.classList.add('ready'));
 
     // ----- Modal -----
     $('#about-trigger').addEventListener('click', (e) => {

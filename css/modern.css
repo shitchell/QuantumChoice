@@ -217,6 +217,12 @@ main.card {
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.tab-panels.ready {
+  opacity: 1;
 }
 
 .tab-panels::-webkit-scrollbar {
