@@ -146,17 +146,15 @@ main.card {
   box-shadow: var(--glass-shadow);
   padding: var(--space-lg);
   opacity: 0;
-  transform: translateY(10px);
+  /* transform: translateY(10px); */
   transition:
     background var(--transition-base),
     border var(--transition-base),
-    opacity var(--transition-long),
-    transform var(--transition-slow);
+    opacity var(--transition-long);
 }
 
 main.card.ready {
   opacity: 1;
-  transform: translateY(0);
 }
 
 /* ----- Tabs ----- */
