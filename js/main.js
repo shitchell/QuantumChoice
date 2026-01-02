@@ -42,6 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const aboutModal = $('#about-modal');
     const toastContainer = $('#toast-container');
 
+    // ----- Theme Initialization -----
+    function getSystemTheme() {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+        const isDark = theme === 'dark';
+        particlesEl.classList.toggle('dark', isDark);
+        mainCard.classList.toggle('dark', isDark);
+        document.body.classList.toggle('dark', isDark);
+        $('#theme-toggle').textContent = isDark ? 'light' : 'dark';
+
+        // Update particle line color
+        if (window.pJSDom && window.pJSDom[0]) {
+            pJSDom[0].pJS.particles.line_linked.color_rgb_line = isDark
+                ? {r: 129, g: 140, b: 248}
+                : {r: 255, g: 255, b: 255};
+        }
+    }
+
+    // Load saved theme or use system preference
+    const savedTheme = localStorage.getItem('theme');
+    const initialTheme = savedTheme || getSystemTheme();
+    applyTheme(initialTheme);
+
     // ----- Tabs -----
     const tabs = $$('.tab');
     const panels = $$('.tab-panel');
@@ -84,32 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----- Theme Toggle -----
     $('#theme-toggle').addEventListener('click', (e) => {
         e.preventDefault();
-        const toggle = e.target;
-        const isDark = toggle.textContent === 'dark';
-
-        if (isDark) {
-            // Switch to dark
-            particlesEl.classList.add('dark');
-            mainCard.classList.add('dark');
-            document.body.classList.add('dark');
-            toggle.textContent = 'light';
-
-            // Update particle line color to purple/blue
-            if (window.pJSDom && window.pJSDom[0]) {
-                pJSDom[0].pJS.particles.line_linked.color_rgb_line = {r: 129, g: 140, b: 248};
-            }
-        } else {
-            // Switch to light
-            particlesEl.classList.remove('dark');
-            mainCard.classList.remove('dark');
-            document.body.classList.remove('dark');
-            toggle.textContent = 'dark';
-
-            // Update particle line color to white
-            if (window.pJSDom && window.pJSDom[0]) {
-                pJSDom[0].pJS.particles.line_linked.color_rgb_line = {r: 255, g: 255, b: 255};
-            }
-        }
+        const newTheme = e.target.textContent === 'dark' ? 'dark' : 'light';
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
     });
 
     // ----- Fullscreen Toggle -----
